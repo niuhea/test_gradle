@@ -30,3 +30,28 @@ task intro(dependsOn: hello) << {
 gradle -q task1
 
 
+API访问：
+task hello3 << {
+    println "Hello Earth"
+}
+hello3.doFirst {
+    println "hello Venus"
+}
+
+hello3.doLast {
+    println "hello Mars"
+}
+
+hello3 << {
+    println "hello Jupiter"
+}
+执行：
+gradle -q hello3
+
+
+//默认任务
+defaultTasks 'clean', 'run'
+执行：
+gradle -q
+
+
