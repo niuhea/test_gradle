@@ -1,0 +1,30 @@
+使用Java插件：
+app plugin: 'java'
+例子：Gradle源码sample/java/quickstart
+
+外部依赖：
+
+repositories {
+    mavenCentral()
+}
+
+查看项目所有属性：
+gradle properties
+
+
+创建Eclipse项目：
+apply plugin: 'eclipse'
+
+
+多项目Java构建(sample/java/multiproject)
+multiproject/
+api/
+services/webservice/
+shared
+
+创建setting.gradle配置文件
+include "shared", "api" "service:webservice", "service:shared"
+
+项目之间的依赖（略）
+
+

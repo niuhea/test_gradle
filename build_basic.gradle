@@ -1,0 +1,93 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+
+//hello gradle demo
+task hello {
+    doLast {
+        println "hello, Gradle!"
+    }
+}
+
+task hello2 << {
+    println "hello world!"
+}
+
+
+//use groovy
+task upper << {
+    String someString = "My_name"
+    println "Original:" + someString
+    println "Upper case:" + someString.toUpperCase()
+}
+
+task count << {
+    4.times {print "$it "}
+}
+
+
+//Task依赖
+task intro(dependsOn: hello) << {
+    println "I'm Gradle"
+}
+
+
+//动态Task
+4.times { counter ->
+    task "task$counter" << {
+        println "I'm task number $counter"
+    }
+}
+task0.dependsOn task2, task3
+
+
+//Task API invoke
+task hello3 << {
+    println "Hello Earth"
+}
+hello3.doFirst {
+    println "hello Venus"
+}
+
+hello3.doLast {
+    println "hello Mars"
+}
+hello3 << {
+    println "hello Jupiter"
+}
+
+
+//默认任务
+defaultTasks 'clean', 'run'
+task clean << {
+    println "default cleaning"
+}
+task run << {
+    println "default running"
+}
+
+
+//根据不同任务选择输出
+task distribution << {
+    println "we build the zip with version=$version"
+}
+task release(dependsOn: "distribution") << {
+    println "we release now"
+}
+gradle.taskGraph.whenReady {taskGraph ->
+    if (taskGraph.hasTask(release)) {
+        version = '1.0'
+    } else {
+        version = '1.0-snapshot'
+    }
+}
