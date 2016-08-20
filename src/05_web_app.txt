@@ -1,0 +1,18 @@
+War插件和Jetty插件
+
+构建War文件
+apply plugin: 'war'
+
+Running your web application
+apply plugin: 'jetty'
+
+
+多任务调用
+排除任务
+
+项目列表
+gradle projects
+任务列表
+gradle tasks
+获取依赖列表
+gradle dependencies.

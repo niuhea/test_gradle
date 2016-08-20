@@ -1,0 +1,32 @@
+依赖管理：
+
+声明依赖：
+dependencies {
+    compile group: 'comments-collections', name: 'commons-collections', version: '3.2'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+Maven仓库：
+repositories {
+    mavenCentral()
+}
+
+远程Maven仓库：
+repositories {
+ maven {
+   url "http://repo.mycompany.com/maven2"
+ }
+}
+
+发布artifacts：
+
+发布Maven库：
+apply plugin: 'maven'
+uploadArchives {
+    repositories {
+        mavenDeveloper {
+            repository(url: 'file://localhost/tmp/myRepo')
+        }
+    }
+}
+
